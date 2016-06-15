@@ -15,6 +15,24 @@ Make sur the navigation pattern is based on TabBar
 
 Work around :
 To fix this issue, we can :
+1- override tabBar(tabBar: UITabBar, didSelectItem item: UITabBarItem) , get the affected page from selected index, access searchBar, and set its Active value to false :
+```javascript
+    for viewController in self.viewControllers! {
+            let selected = viewController as? UINavigationController
+           
+            if selected != nil {
+                
+                if selected?.viewControllers.first is searchViewController {
+                    let searchController  = selected?.viewControllers.first as? searchViewController
+                    
+                    if searchController != nil && searchController?.searchController != nil{
+                        searchController?.searchController.active = false
+                    }
+                }
+            }
+        }
+```
+ 
 
-simply use the search bar under the navigation bar
-hide navigation bar for the searchPage, and put the search bar at the same position as the navgation bar
+2- simply use the search bar under the navigation bar
+3- hide navigation bar for the searchPage, and put the search bar at the same position as the navgation bar
